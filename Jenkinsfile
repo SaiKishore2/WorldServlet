@@ -64,13 +64,5 @@ stages {
         sh label: '', script: 'ansible-playbook deploy.yml'
       }
  }
-}
-post {
-        success {
-            mail to:"kishore.krish.54321@gmail.com", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: "Build success"
-        }
-        failure {
-            mail to:"kishore.krish.54321@gmail.com", subject:"FAILURE: ${currentBuild.fullDisplayName}", body: "Build failed"
-        }
-    }       
+}      
 }
