@@ -12,7 +12,7 @@ stages {
 
       // Get some code from a GitHub repository
 
-      git 'https://github.com/raknas999/hello-world-servlet.git'
+      git 'https://github.com/SaiKishore2/WorldServlet.git'
 
       // Get the Maven tool.
      
@@ -34,19 +34,12 @@ stages {
        }
 //}
    }
- 
-  stage('Results') {
-      steps {
-      junit '**/target/surefire-reports/TEST-*.xml'
-      archiveArtifacts 'target/*.war'
-      }
- }
- stage('Sonarqube') {
+  stage('Sonarqube') {
     environment {
-        scannerHome = tool 'sonarqube'
+        scannerHome = tool 'Sonarqube'
     }
     steps {
-        withSonarQubeEnv('sonarqube') {
+        withSonarQubeEnv('Sonarqube') {
             sh "${scannerHome}/bin/sonar-scanner"
         }
   //      timeout(time: 10, unit: 'MINUTES') {
@@ -64,13 +57,5 @@ stages {
         sh label: '', script: 'ansible-playbook deploy.yml'
       }
  }
-}
-post {
-        success {
-            mail to:"raknas000@gmail.com", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: "Build success"
-        }
-        failure {
-            mail to:"raknas000@gmail.com", subject:"FAILURE: ${currentBuild.fullDisplayName}", body: "Build failed"
-        }
-    }       
+}      
 }
