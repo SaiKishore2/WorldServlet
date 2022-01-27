@@ -4,3 +4,7 @@
   tasks:
   - name: Stop Tomcat
     service: name=tomcat state=start
+  - name: Deploy War File
+    get_url:
+      url: http://13.233.102.159:8081/nexus/service/local/artifact/maven/redirect?r=releases&g=com.geekcap.vmturbo&a=hello-world-servlet-example&p=war&v=LATEST
+      dest: /usr/share/tomcat/webapps/hello-world-servlet-example.war
